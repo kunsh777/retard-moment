@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HELL YEAH 1</title>
+  <style>
+    body {
+      background-color: #ffb3b3;
+      font-family: Helvetica, sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    button {
+      margin: 20px;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+    }
+    #retry {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="message">WILL YOU BE MY WIFE?</h1>
+  <button id="yes" onclick="handleYes()">YES</button>
+  <button id="no" onclick="handleNo()">NO</button>
+  <button id="retry" onclick="reset()">TRY AGAIN</button>
+
+  <script>
+    let noClicks = parseInt(localStorage.getItem("noClicks")) || 0;
+
+    window.onload = function() {
+      if (noClicks >= 10) {
+        localStorage.setItem("noClicks", 0);
+        noClicks = 0;
+      }
+    };
+
+    function handleYes() {
+      window.location.href = "hell-yeah-2.html";
+    }
+
+    function handleNo() {
+      noClicks++;
+      localStorage.setItem("noClicks", noClicks);
+
+      const message = document.getElementById("message");
+      const yesBtn = document.getElementById("yes");
+      const noBtn = document.getElementById("no");
+      const retryBtn = document.getElementById("retry");
+
+      if (noClicks >= 10) {
+        message.innerText = "FUCKING PLEASE";
+        noBtn.style.display = "none";
+        yesBtn.style.display = "none";
+        retryBtn.style.display = "inline-block";
+      } else if (noClicks >= 5) {
+        message.innerText = "BITCH FUCKING CLICK YES ALREADY";
+        retryBtn.style.display = "inline-block";
+        noBtn.style.display = "none";
+        yesBtn.style.display = "none";
+      } else {
+        message.innerText = "NAH WRONG ANSWER TWIN";
+        retryBtn.style.display = "inline-block";
+        noBtn.style.display = "none";
+        yesBtn.style.display = "none";
+      }
+    }
+
+    function reset() {
+      window.location.href = "hell-yeah-1.html";
+    }
+  </script>
+</body>
+</html>
